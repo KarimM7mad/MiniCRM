@@ -39,6 +39,7 @@
                 </tbody>
                 @endforeach
             </table>
+            {{ $employees->links() }}
             @else
             <h1>NO Employee Exist So add one now</h1>
             <a class="btn btn-primary" href="/employee/create">Add an Employee</a>

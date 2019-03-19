@@ -39,8 +39,8 @@ class Employee extends Model
     public function ModifyEmployeeData($request)
     {
         try {
-            $this->Fname = $request->input('Fname');
-            $this->Lname = $request->input('Lname');
+            $this->Fname = $request->input('fname');
+            $this->Lname = $request->input('lname');
             $this->email = $request->input('email');
             $this->phone = $request->input('phone');
             $this->company = $request->input('company');

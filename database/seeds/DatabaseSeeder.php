@@ -26,14 +26,15 @@ class DatabaseSeeder extends Seeder
             'name' => 'Google',
             'email' => 'Google@google.com',
             'website' => 'google.com',
-            'logo' => 'GoogleLogo'
+            //must be uploaded
+            'logo' => 'GoogleLogo.jpg'
         ]);
 
         Employee::create([
             'Fname' => 'Karim',
             'Lname' => 'Mohamed',
             'email' => 'K@test.com',
-            'phone' => '01012223145',
+            'phone' => '01012223157',
             'company' => (App\Company::where('name', 'Google')->get())[0]['id']
         ]);
     }

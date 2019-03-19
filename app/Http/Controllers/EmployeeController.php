@@ -56,6 +56,8 @@ class EmployeeController extends Controller
                 error_log("the company doesn't exist");
                 return redirect("/");
             } else {
+
+                $this->validate($request, ['fname' => 'required', 'lname' => 'required']);
                 $emp = new Employee();
                 $emp->addNewEmployee($request);
                 return redirect('/employee');
@@ -73,8 +75,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        if(auth()->user()){
-            return view('employee.viewSpecificEmployee')->with('emp',Employee::find($id));
+        if (auth()->user()) {
+            return view('employee.viewSpecificEmployee')->with('emp', Employee::find($id));
         }
     }
 
@@ -86,7 +88,13 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (auth()->user()) {
+            return view('employee.editEmployeeData', [
+                'companies' => Company::all(),
+                'emp' => Employee::find($id)
+            ]);
+        }
+        return redirect("/");
     }
 
     /**
@@ -98,7 +106,13 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (auth()->user()) {
+            $this->validate($request, ['fname' => 'required', 'lname' => 'required']);
+            $emp = Employee::find($id);
+            $emp->ModifyEmployeeData($request);
+            return redirect('/employee');
+        }
+        return redirect('/');
     }
 
     /**
@@ -109,7 +123,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        if(auth()->user()){
+        if (auth()->user()) {
             $emp = Employee::find($id);
             $emp->delete();
             return redirect('/employee');
