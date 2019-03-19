@@ -62,6 +62,9 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/company">Browse Companies</a>
                             <a class="dropdown-item" href="/company/create">Create a new Company</a>
+                            <a class="dropdown-item" href="/employee/create">add a new Employee</a>
+                            <a class="dropdown-item" href="/employee">view All Employee</a>
+
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

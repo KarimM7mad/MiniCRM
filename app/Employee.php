@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use App\Company;
 
 class Employee extends Model
 {
@@ -13,17 +14,16 @@ class Employee extends Model
         return $this->belongTo('App\Company', 'company');
     }
 
-    public function addNewEmployee(Request $request, $companyID)
+    public function addNewEmployee(Request $request)
     {
-        if ($companyID == null)
-            return false;
+        
 
         try {
-            $this->Fname = $request->input('Fname');
-            $this->Lname = $request->input('Lname');
+            $this->Fname = $request->input('fname');
+            $this->Lname = $request->input('lname');
             $this->email = $request->input('email');
             $this->phone = $request->input('phone');
-            $this->company = $companyID;
+            $this->company = $request->input('company');
             $this->save();
             return true;
         } catch (\Exception $th) {
@@ -32,6 +32,9 @@ class Employee extends Model
         return false;
     }
 
+    public function getName($id){
+        return Company::find($id)->name;
+    }
 
     public function ModifyEmployeeData($request)
     {
@@ -40,6 +43,7 @@ class Employee extends Model
             $this->Lname = $request->input('Lname');
             $this->email = $request->input('email');
             $this->phone = $request->input('phone');
+            $this->company = $request->input('company');
             $this->save();
             return true;
         } catch (\Exception $th) {

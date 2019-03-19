@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Employee;
+use App\Company;
 
 class EmployeeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        if (auth()->user()) {
+            $employees = Employee::paginate(10);
+            return view('employee.viewAllEmployees')->with('employees', $employees);
+        }
+        return redirect('/');
     }
 
     /**
@@ -23,7 +35,11 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()) {
+            return view('employee.createEmployeeForm')->with('companies', Company::all());
+        } else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -34,7 +50,19 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (auth()->user()) {
+
+            if (Company::find($request->input('company')) == null) {
+                error_log("the company doesn't exist");
+                return redirect("/");
+            } else {
+                $emp = new Employee();
+                $emp->addNewEmployee($request);
+                return redirect('/employee');
+            }
+        }
+        error_log("Unauthorized access");
+        return redirect('/');
     }
 
     /**
@@ -45,7 +73,9 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        if(auth()->user()){
+            return view('employee.viewSpecificEmployee')->with('emp',Employee::find($id));
+        }
     }
 
     /**
@@ -79,6 +109,10 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(auth()->user()){
+            $emp = Employee::find($id);
+            $emp->delete();
+            return redirect('/employee');
+        }
     }
 }
