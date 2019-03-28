@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Google',
             'email' => 'Google@google.com',
             'website' => 'google.com',
-            //must be uploaded
+            //must be uploaded from a dir
             'logo' => 'GoogleLogo.jpg'
         ]);
 
