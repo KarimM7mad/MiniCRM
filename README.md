@@ -1,4 +1,4 @@
-# MiniCRM
+# LARAVEL MiniCRM
 Mini-CRM Project to manage companies and their employees with the following Features:
 * Basic Laravel Auth: ability to log in as administrator
 * Use database seeds to create first user with email admin@admin.com and password “password”
