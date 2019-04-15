@@ -1,6 +1,6 @@
 # MiniCRM
 Mini-CRM Project to manage companies and their employees with the following Features:
--Markup : *Basic Laravel Auth: ability to log in as administrator
+*Basic Laravel Auth: ability to log in as administrator
 *Use database seeds to create first user with email admin@admin.com and password “password”
 *CRUD functionality (Create / Read / Update / Delete) for two menu items: Companies and Employees.
 *Companies DB table consists of these fields: Name (required), email, logo (minimum 100×100), website
